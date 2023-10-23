@@ -1,6 +1,8 @@
 package com.ku.quizzical.app.controllers;
 
 import java.time.Instant;
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -27,10 +29,17 @@ public final class QuestionController {
     }
 
     // CREATE Method
-    // Saves a Questions
+    // Saves a Question
     @PostMapping()
     public ResponseEntity<Question> saveQuestion(@RequestBody Question question) {
         return new ResponseEntity<Question>(this.service.saveQuestion(question), HttpStatus.OK);
+    }
+
+    // READ Method
+    // Gets all Questions
+    @GetMapping()
+    public List<Question> getAllQuestions() {
+        return this.service.getAllQuestions();
     }
 
     // TEST Method

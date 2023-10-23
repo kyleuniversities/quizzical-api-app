@@ -29,7 +29,11 @@ public final class Question {
         return new Question(id, question, answer, numberOfMilliseconds);
     }
 
-    // Constructor Method
+    // Constructor Methods
+    private Question() {
+        super();
+    }
+
     private Question(long id, String question, String answer, int numberOfMilliseconds) {
         super();
         this.id = id;
