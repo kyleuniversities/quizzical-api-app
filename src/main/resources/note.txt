@@ -1,0 +1,1 @@
+NOTE: An "application.properties" goes in this directory, but it is ignored to shield credentials
