@@ -38,6 +38,7 @@ public class QuestionServiceImpl implements QuestionService {
         existingQuestion.setQuestion(question.getQuestion());
         existingQuestion.setAnswer(question.getAnswer());
         existingQuestion.setNumberOfMilliseconds(question.getNumberOfMilliseconds());
+        this.repository.save(existingQuestion);
         return existingQuestion;
     }
 
