@@ -8,9 +8,9 @@ public interface QuestionService {
 
     List<Question> getAllQuestions();
 
-    Question getQuestionById(long id);
+    Question getQuestionById(String id);
 
-    Question updateQuestion(Question question, long id);
+    Question updateQuestion(Question question, String id);
 
-    void deleteQuestion(long id);
+    void deleteQuestion(String id);
 }

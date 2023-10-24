@@ -45,21 +45,21 @@ public final class QuestionController {
     // READ Method
     // Gets a Question by its id
     @GetMapping("{id}")
-    public ResponseEntity<Question> getQuestionById(@PathVariable long id) {
+    public ResponseEntity<Question> getQuestionById(@PathVariable String id) {
         return new ResponseEntity<Question>(this.service.getQuestionById(id), HttpStatus.OK);
     }
 
     // UPDATE Method
     // Updates a Question
     @PatchMapping("{id}")
-    public ResponseEntity<Question> updateQuestion(@PathVariable long id, @RequestBody Question question) {
+    public ResponseEntity<Question> updateQuestion(@PathVariable String id, @RequestBody Question question) {
         return new ResponseEntity<Question>(this.service.updateQuestion(question, id), HttpStatus.OK);
     }
 
     // DELETE Method
     // Deletes a Question
     @DeleteMapping("{id}")
-    public String deleteQuestion(@PathVariable long id) {
+    public String deleteQuestion(@PathVariable String id) {
         try {
             this.service.deleteQuestion(id);
         } catch (Exception e) {

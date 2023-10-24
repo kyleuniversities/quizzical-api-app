@@ -11,8 +11,8 @@ public final class Question {
 
     // Instance Fields
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
 
     @Column(name = "question", unique = true, nullable = false)
     private String question;
@@ -24,7 +24,7 @@ public final class Question {
     private int numberOfMilliseconds;
 
     // New Instance Method
-    public static Question newInstance(long id, String question, String answer,
+    public static Question newInstance(String id, String question, String answer,
             int numberOfMilliseconds) {
         return new Question(id, question, answer, numberOfMilliseconds);
     }
@@ -34,7 +34,7 @@ public final class Question {
         super();
     }
 
-    private Question(long id, String question, String answer, int numberOfMilliseconds) {
+    private Question(String id, String question, String answer, int numberOfMilliseconds) {
         super();
         this.id = id;
         this.question = question;
@@ -43,7 +43,7 @@ public final class Question {
     }
 
     // Accessor Methods
-    public long getId() {
+    public String getId() {
         return this.id;
     }
 
@@ -60,7 +60,7 @@ public final class Question {
     }
 
     // Mutator Methods
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -79,7 +79,7 @@ public final class Question {
     // To String Method
     @Override
     public String toString() {
-        return String.format("Question(\"%s\", \"%s\", %s, %d)", this.question, this.answer,
-                this.id + "", this.numberOfMilliseconds);
+        return String.format("Question(\"%s\", \"%s\", %d, \"%s\")", this.question, this.answer,
+                this.numberOfMilliseconds, this.id);
     }
 }
