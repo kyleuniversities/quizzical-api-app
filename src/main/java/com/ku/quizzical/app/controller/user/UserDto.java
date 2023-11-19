@@ -1,8 +1,7 @@
 package com.ku.quizzical.app.controller.user;
 
-public record UserDto(
-        String id,
-        String username,
-        String email) {
+import java.util.List;
+
+public record UserDto(String id, String username, String email, List<String> roles) {
 
 }

@@ -19,17 +19,14 @@ public class JwtHelper {
     /**
      * Constant for secret key
      */
-    private static final String SECRET_KEY = "sample_key_12345678901234567890";
+    private static final String SECRET_KEY = "sample_key_123456789012345678901234567890";
 
     /**
      * Returns the claims of a JWT token
      */
     public static Claims getClaims(String token) {
-        Claims claims = Jwts.parserBuilder()
-                .setSigningKey(JwtHelper.getJwtSigningKey())
-                .build()
-                .parseClaimsJws(token)
-                .getBody();
+        Claims claims = Jwts.parserBuilder().setSigningKey(JwtHelper.getJwtSigningKey()).build()
+                .parseClaimsJws(token).getBody();
         return claims;
     }
 
@@ -80,8 +77,9 @@ public class JwtHelper {
      * Issues a JWT Token
      */
     public static String issueToken(String subject, Map<String, Object> claims) {
-        String token = Jwts.builder().setClaims(claims).setSubject(subject).setIssuer("quizzical_placeholder_issuer")
-                .setIssuedAt(Date.from(Instant.now())).setExpiration(Date.from(Instant.now().plus(1, DAYS)))
+        String token = Jwts.builder().setClaims(claims).setSubject(subject)
+                .setIssuer("quizzical_placeholder_issuer").setIssuedAt(Date.from(Instant.now()))
+                .setExpiration(Date.from(Instant.now().plus(1, DAYS)))
                 .signWith(JwtHelper.getJwtSigningKey()).compact();
         return token;
     }

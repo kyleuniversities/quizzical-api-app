@@ -1,6 +1,7 @@
 package com.ku.quizzical.app.controller.auth;
 
 import java.util.List;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,59 +14,24 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ku.quizzical.app.controller.user.User;
-import com.ku.quizzical.app.controller.user.UserServiceImpl;
-
 @CrossOrigin
 @RestController
 @RequestMapping("/auth")
 public final class AuthenticationController {
     // Instance Fields
-    private UserServiceImpl service;
+    private final AuthenticationService authenticationService;
 
     // Constructor Method
-    public AuthenticationController(UserServiceImpl service) {
-        super();
-        this.service = service;
+    public AuthenticationController(AuthenticationService authenticationService) {
+        this.authenticationService = authenticationService;
     }
 
     // CREATE Method
-    // Saves a User
-    @PostMapping()
-    public ResponseEntity<User> saveUser(@RequestBody User question) {
-        return new ResponseEntity<User>(this.service.saveUser(question), HttpStatus.OK);
-    }
-
-    // READ Method
-    // Gets all Users
-    @GetMapping()
-    public List<User> getAllUsers() {
-        return this.service.getAllUsers();
-    }
-
-    // READ Method
-    // Gets a User by its id
-    @GetMapping("{id}")
-    public ResponseEntity<User> getUserById(@PathVariable String id) {
-        return new ResponseEntity<User>(this.service.getUserById(id), HttpStatus.OK);
-    }
-
-    // UPDATE Method
-    // Updates a User
-    @PatchMapping("{id}")
-    public ResponseEntity<User> updateUser(@PathVariable String id, @RequestBody User question) {
-        return new ResponseEntity<User>(this.service.updateUser(question, id), HttpStatus.OK);
-    }
-
-    // DELETE Method
-    // Deletes a User
-    @DeleteMapping("{id}")
-    public String deleteUser(@PathVariable String id) {
-        try {
-            this.service.deleteUser(id);
-        } catch (Exception e) {
-            // Do Nothing
-        }
-        return "\"The User with id \\\"" + id + "\\\" has been deleted.\"";
+    // Logs in a user
+    @PostMapping("login")
+    public ResponseEntity<?> login(@RequestBody AuthenticationRequest request) {
+        AuthenticationResponse response = this.authenticationService.login(request);
+        return ResponseEntity.ok().header(HttpHeaders.AUTHORIZATION, response.token())
+                .body(response);
     }
 }

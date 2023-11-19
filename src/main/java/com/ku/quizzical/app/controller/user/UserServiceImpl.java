@@ -1,6 +1,7 @@
 package com.ku.quizzical.app.controller.user;
 
 import java.util.List;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,7 +18,8 @@ public class UserServiceImpl implements UserService {
     // Interface Methods
     @Override
     public User saveUser(User user) {
-        return this.repository.save(user);
+        return this.repository.save(User.newInstance(user.getId(), user.getUsername(),
+                user.getEmail(), new BCryptPasswordEncoder().encode(user.getPassword())));
     }
 
     @Override
