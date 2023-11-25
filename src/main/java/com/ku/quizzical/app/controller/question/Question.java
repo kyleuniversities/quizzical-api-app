@@ -1,10 +1,18 @@
 package com.ku.quizzical.app.controller.question;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * Model class for Quiz Questions+
  */
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "question")
 public final class Question {
@@ -22,59 +30,6 @@ public final class Question {
 
     @Column(name = "number_of_milliseconds", nullable = false)
     private int numberOfMilliseconds;
-
-    // New Instance Method
-    public static Question newInstance(String id, String question, String answer,
-            int numberOfMilliseconds) {
-        return new Question(id, question, answer, numberOfMilliseconds);
-    }
-
-    // Constructor Methods
-    private Question() {
-        super();
-    }
-
-    private Question(String id, String question, String answer, int numberOfMilliseconds) {
-        super();
-        this.id = id;
-        this.question = question;
-        this.answer = answer;
-        this.numberOfMilliseconds = numberOfMilliseconds;
-    }
-
-    // Accessor Methods
-    public String getId() {
-        return this.id;
-    }
-
-    public String getQuestion() {
-        return this.question;
-    }
-
-    public String getAnswer() {
-        return this.answer;
-    }
-
-    public int getNumberOfMilliseconds() {
-        return this.numberOfMilliseconds;
-    }
-
-    // Mutator Methods
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public void setQuestion(String question) {
-        this.question = question;
-    }
-
-    public void setAnswer(String answer) {
-        this.answer = answer;
-    }
-
-    public void setNumberOfMilliseconds(int numberOfMilliseconds) {
-        this.numberOfMilliseconds = numberOfMilliseconds;
-    }
 
     // To String Method
     @Override

@@ -18,8 +18,8 @@ public class UserServiceImpl implements UserService {
     // Interface Methods
     @Override
     public User saveUser(User user) {
-        return this.repository.save(User.newInstance(user.getId(), user.getUsername(),
-                user.getEmail(), new BCryptPasswordEncoder().encode(user.getPassword())));
+        return this.repository.save(new User(user.getId(), user.getUsername(), user.getEmail(),
+                new BCryptPasswordEncoder().encode(user.getPassword())));
     }
 
     @Override
