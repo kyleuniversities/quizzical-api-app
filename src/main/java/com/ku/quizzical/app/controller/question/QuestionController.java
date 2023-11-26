@@ -43,6 +43,13 @@ public final class QuestionController {
     }
 
     // READ Method
+    // Gets all Questions by Quiz Id
+    @GetMapping("/by/{quizId}")
+    public List<QuestionDto> getAllQuestionsByQuizId(@PathVariable String quizId) {
+        return this.service.getAllQuestionsByQuizId(quizId);
+    }
+
+    // READ Method
     // Gets a Question by its id
     @GetMapping("{id}")
     public ResponseEntity<QuestionDto> getQuestionById(@PathVariable String id) {

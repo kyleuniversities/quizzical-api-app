@@ -44,6 +44,12 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
+    public List<QuestionDto> getAllQuestionsByQuizId(String quizId) {
+        return ListHelper.map(this.quizRepository.findById(quizId).get().getQuestions(), this.dtoMapper::apply);
+    }
+                
+
+    @Override
     public QuestionDto updateQuestion(QuestionDto question, String id) {
         Question existingQuestion = this.repository.findById(id).get();
         existingQuestion.setQuestion(question.question());
