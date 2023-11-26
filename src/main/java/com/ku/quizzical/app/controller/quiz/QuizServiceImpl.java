@@ -40,7 +40,8 @@ public class QuizServiceImpl implements QuizService {
 
     @Override
     public List<QuizDto> getAllQuizsByUserId(String userId) {
-        return ListHelper.map(this.userRepository.findById(userId).get().getQuizzes(), this.dtoMapper::apply);
+        return ListHelper.map(this.userRepository.findById(userId).get().getQuizzes(),
+                this.dtoMapper::apply);
     }
 
     @Override

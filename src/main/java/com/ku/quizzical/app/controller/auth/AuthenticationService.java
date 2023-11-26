@@ -21,9 +21,13 @@ public class AuthenticationService {
     }
 
     public AuthenticationResponse login(AuthenticationRequest request) {
+        System.out.println("LOGIN");
         Authentication authentication = this.authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.username(), request.password()));
+        System.out.println("LOGIN 2");
         User principal = (User) authentication.getPrincipal();
+        System.out.println("USERNAME: " + request.username());
+        System.out.println("PRINCIPAL: " + principal);
         UserDto userDto = this.userDtoMapper.apply(principal);
         String token = JwtHelper.issueToken(userDto.username(), userDto.roles());
         return new AuthenticationResponse(token, userDto);
