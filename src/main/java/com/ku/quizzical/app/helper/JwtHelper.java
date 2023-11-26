@@ -7,7 +7,7 @@ import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
+import com.ku.quizzical.common.helper.MapHelper;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -69,8 +69,11 @@ public class JwtHelper {
     /**
      * Issues a JWT Token
      */
-    public static String issueToken(String subject, List<String> scopes) {
-        return JwtHelper.issueToken(subject, Map.of("scopes", scopes));
+    public static String issueToken(String subject, String id, List<String> scopes) {
+        Map<String, Object> claims = MapHelper.newLinkedHashMap();
+        MapHelper.put(claims, "id", id);
+        MapHelper.put(claims, "scopes", scopes);
+        return JwtHelper.issueToken(subject, claims);
     }
 
     /**

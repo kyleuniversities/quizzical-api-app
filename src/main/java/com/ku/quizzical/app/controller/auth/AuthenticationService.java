@@ -29,7 +29,7 @@ public class AuthenticationService {
         System.out.println("USERNAME: " + request.username());
         System.out.println("PRINCIPAL: " + principal);
         UserDto userDto = this.userDtoMapper.apply(principal);
-        String token = JwtHelper.issueToken(userDto.username(), userDto.roles());
+        String token = JwtHelper.issueToken(userDto.username(), userDto.id(), userDto.roles());
         return new AuthenticationResponse(token, userDto);
     }
 }
