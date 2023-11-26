@@ -23,7 +23,7 @@ public final class Question {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    @Column(name = "question", unique = true, nullable = false)
+    @Column(name = "question", nullable = false)
     private String question;
 
     @Column(name = "answer", nullable = false)

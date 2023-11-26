@@ -26,7 +26,7 @@ public final class Quiz {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    @Column(name = "title", unique = true, nullable = false)
+    @Column(name = "title", nullable = false)
     private String title;
 
     @Column(name = "description", nullable = false)
