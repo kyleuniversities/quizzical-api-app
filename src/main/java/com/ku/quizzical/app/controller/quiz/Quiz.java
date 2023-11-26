@@ -2,6 +2,7 @@ package com.ku.quizzical.app.controller.quiz;
 
 import java.util.List;
 import com.ku.quizzical.app.controller.question.Question;
+import com.ku.quizzical.app.controller.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,7 +32,11 @@ public final class Quiz {
     @Column(name = "description", nullable = false)
     private String description;
 
-    @OneToMany(mappedBy = "quiz")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    public User user;
+
+    @OneToMany(mappedBy = "quiz", cascade = CascadeType.REMOVE)
     private List<Question> questions;
 
     // To String Method

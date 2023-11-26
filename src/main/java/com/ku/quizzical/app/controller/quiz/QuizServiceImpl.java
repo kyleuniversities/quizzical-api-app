@@ -2,17 +2,21 @@ package com.ku.quizzical.app.controller.quiz;
 
 import java.util.List;
 import org.springframework.stereotype.Service;
+import com.ku.quizzical.app.controller.user.User;
+import com.ku.quizzical.app.controller.user.UserRepository;
 import com.ku.quizzical.common.helper.ListHelper;
 
 @Service
 public class QuizServiceImpl implements QuizService {
     // Instance Fields
+    private UserRepository userRepository;
     private QuizRepository repository;
     private QuizDtoMapper dtoMapper;
 
     // Constructor Method
-    public QuizServiceImpl(QuizRepository repository) {
+    public QuizServiceImpl(UserRepository userRepository, QuizRepository repository) {
         super();
+        this.userRepository = userRepository;
         this.repository = repository;
         this.dtoMapper = new QuizDtoMapper();
     }
@@ -21,8 +25,10 @@ public class QuizServiceImpl implements QuizService {
     @Override
     public QuizDto saveQuiz(QuizDto quizDto) {
         Quiz quiz = new Quiz();
+        User user = this.userRepository.findById(quizDto.userId()).get();
         quiz.setTitle(quizDto.title());
         quiz.setDescription(quizDto.description());
+        quiz.setUser(user);
         quiz.setQuestions(ListHelper.newArrayList());
         return this.dtoMapper.apply(this.repository.save(quiz));
     }

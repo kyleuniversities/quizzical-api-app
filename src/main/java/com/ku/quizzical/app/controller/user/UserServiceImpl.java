@@ -3,43 +3,49 @@ package com.ku.quizzical.app.controller.user;
 import java.util.List;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import com.ku.quizzical.common.helper.ListHelper;
 
 @Service
 public class UserServiceImpl implements UserService {
     // Instance Fields
     private UserRepository repository;
+    private UserDtoMapper dtoMapper;
 
     // Constructor Method
     public UserServiceImpl(UserRepository repository) {
         super();
         this.repository = repository;
+        this.dtoMapper = new UserDtoMapper();
     }
 
     // Interface Methods
     @Override
-    public User saveUser(User user) {
-        return this.repository.save(new User(user.getId(), user.getUsername(), user.getEmail(),
-                new BCryptPasswordEncoder().encode(user.getPassword())));
+    public UserDto saveUser(UserDto userDto) {
+        User user = new User();
+        user.setUsername(userDto.username());
+        user.setEmail(userDto.email());
+        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+        user.setQuizzes(ListHelper.newArrayList());
+        return this.dtoMapper.apply(this.repository.save(user));
     }
 
     @Override
-    public List<User> getAllUsers() {
-        return this.repository.findAll();
+    public List<UserDto> getAllUsers() {
+        return ListHelper.map(this.repository.findAll(), this.dtoMapper::apply);
     }
 
     @Override
-    public User getUserById(String id) {
-        return this.repository.findById(id).get();
+    public UserDto getUserById(String id) {
+        return this.dtoMapper.apply(this.repository.findById(id).get());
     }
 
     @Override
-    public User updateUser(User user, String id) {
+    public UserDto updateUser(UserDto user, String id) {
         User existingUser = this.repository.findById(id).get();
-        existingUser.setUsername(user.getUsername());
-        existingUser.setEmail(user.getEmail());
-        existingUser.setPassword(user.getPassword());
+        existingUser.setUsername(user.username());
+        existingUser.setEmail(user.email());
         this.repository.save(existingUser);
-        return existingUser;
+        return this.dtoMapper.apply(existingUser);
     }
 
     @Override

@@ -7,6 +7,8 @@ public interface QuizService {
 
     List<QuizDto> getAllQuizs();
 
+    List<QuizDto> getAllQuizsByUserId();
+
     QuizDto getQuizById(String id);
 
     QuizDto updateQuiz(QuizDto quiz, String id);

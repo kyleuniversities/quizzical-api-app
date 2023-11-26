@@ -7,6 +7,6 @@ import org.springframework.stereotype.Service;
 public class QuizDtoMapper implements Function<Quiz, QuizDto> {
     @Override
     public QuizDto apply(Quiz quiz) {
-        return new QuizDto(quiz.getId(), quiz.getTitle(), quiz.getDescription());
+        return new QuizDto(quiz.getId(), quiz.getTitle(), quiz.getDescription(), quiz.getUser().getId());
     }
 }

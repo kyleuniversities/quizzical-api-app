@@ -3,13 +3,13 @@ package com.ku.quizzical.app.controller.user;
 import java.util.List;
 
 public interface UserService {
-    User saveUser(User question);
+    UserDto saveUser(UserDto question);
 
-    List<User> getAllUsers();
+    List<UserDto> getAllUsers();
 
-    User getUserById(String id);
+    UserDto getUserById(String id);
 
-    User updateUser(User question, String id);
+    UserDto updateUser(UserDto question, String id);
 
     void deleteUser(String id);
 }

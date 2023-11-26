@@ -29,29 +29,29 @@ public final class UserController {
     // CREATE Method
     // Saves a User
     @PostMapping()
-    public ResponseEntity<User> saveUser(@RequestBody User question) {
-        return new ResponseEntity<User>(this.service.saveUser(question), HttpStatus.OK);
+    public ResponseEntity<UserDto> saveUser(@RequestBody UserDto question) {
+        return new ResponseEntity<UserDto>(this.service.saveUser(question), HttpStatus.OK);
     }
 
     // READ Method
     // Gets all Users
     @GetMapping()
-    public List<User> getAllUsers() {
+    public List<UserDto> getAllUsers() {
         return this.service.getAllUsers();
     }
 
     // READ Method
     // Gets a User by its id
     @GetMapping("{id}")
-    public ResponseEntity<User> getUserById(@PathVariable String id) {
-        return new ResponseEntity<User>(this.service.getUserById(id), HttpStatus.OK);
+    public ResponseEntity<UserDto> getUserById(@PathVariable String id) {
+        return new ResponseEntity<UserDto>(this.service.getUserById(id), HttpStatus.OK);
     }
 
     // UPDATE Method
     // Updates a User
     @PatchMapping("{id}")
-    public ResponseEntity<User> updateUser(@PathVariable String id, @RequestBody User question) {
-        return new ResponseEntity<User>(this.service.updateUser(question, id), HttpStatus.OK);
+    public ResponseEntity<UserDto> updateUser(@PathVariable String id, @RequestBody UserDto user) {
+        return new ResponseEntity<UserDto>(this.service.updateUser(user, id), HttpStatus.OK);
     }
 
     // DELETE Method
