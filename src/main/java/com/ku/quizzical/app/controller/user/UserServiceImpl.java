@@ -20,11 +20,11 @@ public class UserServiceImpl implements UserService {
 
     // Interface Methods
     @Override
-    public UserDto saveUser(UserDto userDto) {
+    public UserDto saveUser(UserRegistrationRequest userDto) {
         User user = new User();
         user.setUsername(userDto.username());
         user.setEmail(userDto.email());
-        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+        user.setPassword(new BCryptPasswordEncoder().encode(userDto.password()));
         user.setQuizzes(ListHelper.newArrayList());
         return this.dtoMapper.apply(this.repository.save(user));
     }

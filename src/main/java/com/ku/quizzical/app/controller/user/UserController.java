@@ -29,7 +29,7 @@ public final class UserController {
     // CREATE Method
     // Saves a User
     @PostMapping()
-    public ResponseEntity<UserDto> saveUser(@RequestBody UserDto question) {
+    public ResponseEntity<UserDto> saveUser(@RequestBody UserRegistrationRequest question) {
         return new ResponseEntity<UserDto>(this.service.saveUser(question), HttpStatus.OK);
     }
 
