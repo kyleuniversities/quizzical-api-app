@@ -2,42 +2,55 @@ package com.ku.quizzical.app.controller.question;
 
 import java.util.List;
 import org.springframework.stereotype.Service;
+import com.ku.quizzical.app.controller.quiz.Quiz;
+import com.ku.quizzical.app.controller.quiz.QuizRepository;
+import com.ku.quizzical.common.helper.ListHelper;
 
 @Service
 public class QuestionServiceImpl implements QuestionService {
     // Instance Fields
+    private QuizRepository quizRepository;
     private QuestionRepository repository;
+    private QuestionDtoMapper dtoMapper;
 
     // Constructor Method
-    public QuestionServiceImpl(QuestionRepository repository) {
+    public QuestionServiceImpl(QuizRepository quizRepository, QuestionRepository repository) {
         super();
+        this.quizRepository = quizRepository;
         this.repository = repository;
+        this.dtoMapper = new QuestionDtoMapper();
     }
 
     // Interface Methods
     @Override
-    public Question saveQuestion(Question question) {
-        return this.repository.save(question);
+    public QuestionDto saveQuestion(QuestionDto questionDto) {
+        Quiz quiz = this.quizRepository.findById(questionDto.quizId()).get();
+        Question question = new Question();
+        question.setQuestion(questionDto.question());
+        question.setAnswer(questionDto.answer());
+        question.setNumberOfMilliseconds(questionDto.numberOfMilliseconds());
+        question.setQuiz(quiz);
+        return this.dtoMapper.apply(this.repository.save(question));
     }
 
     @Override
-    public List<Question> getAllQuestions() {
-        return this.repository.findAll();
+    public List<QuestionDto> getAllQuestions() {
+        return ListHelper.map(this.repository.findAll(), this.dtoMapper::apply);
     }
 
     @Override
-    public Question getQuestionById(String id) {
-        return this.repository.findById(id).get();
+    public QuestionDto getQuestionById(String id) {
+        return this.dtoMapper.apply(this.repository.findById(id).get());
     }
 
     @Override
-    public Question updateQuestion(Question question, String id) {
+    public QuestionDto updateQuestion(QuestionDto question, String id) {
         Question existingQuestion = this.repository.findById(id).get();
-        existingQuestion.setQuestion(question.getQuestion());
-        existingQuestion.setAnswer(question.getAnswer());
-        existingQuestion.setNumberOfMilliseconds(question.getNumberOfMilliseconds());
+        existingQuestion.setQuestion(question.question());
+        existingQuestion.setAnswer(question.answer());
+        existingQuestion.setNumberOfMilliseconds(question.numberOfMilliseconds());
         this.repository.save(existingQuestion);
-        return existingQuestion;
+        return this.dtoMapper.apply(existingQuestion);
     }
 
     @Override

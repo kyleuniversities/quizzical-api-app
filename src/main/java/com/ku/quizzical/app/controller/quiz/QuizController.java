@@ -29,29 +29,29 @@ public final class QuizController {
     // CREATE Method
     // Saves a Quiz
     @PostMapping()
-    public ResponseEntity<Quiz> saveQuiz(@RequestBody Quiz quiz) {
-        return new ResponseEntity<Quiz>(this.service.saveQuiz(quiz), HttpStatus.OK);
+    public ResponseEntity<QuizDto> saveQuiz(@RequestBody QuizDto quiz) {
+        return new ResponseEntity<QuizDto>(this.service.saveQuiz(quiz), HttpStatus.OK);
     }
 
     // READ Method
     // Gets all Quizs
     @GetMapping()
-    public List<Quiz> getAllQuizs() {
+    public List<QuizDto> getAllQuizs() {
         return this.service.getAllQuizs();
     }
 
     // READ Method
     // Gets a Quiz by its id
     @GetMapping("{id}")
-    public ResponseEntity<Quiz> getQuizById(@PathVariable String id) {
-        return new ResponseEntity<Quiz>(this.service.getQuizById(id), HttpStatus.OK);
+    public ResponseEntity<QuizDto> getQuizById(@PathVariable String id) {
+        return new ResponseEntity<QuizDto>(this.service.getQuizById(id), HttpStatus.OK);
     }
 
     // UPDATE Method
     // Updates a Quiz
     @PatchMapping("{id}")
-    public ResponseEntity<Quiz> updateQuiz(@PathVariable String id, @RequestBody Quiz quiz) {
-        return new ResponseEntity<Quiz>(this.service.updateQuiz(quiz, id), HttpStatus.OK);
+    public ResponseEntity<QuizDto> updateQuiz(@PathVariable String id, @RequestBody QuizDto quiz) {
+        return new ResponseEntity<QuizDto>(this.service.updateQuiz(quiz, id), HttpStatus.OK);
     }
 
     // DELETE Method

@@ -3,13 +3,13 @@ package com.ku.quizzical.app.controller.question;
 import java.util.List;
 
 public interface QuestionService {
-    Question saveQuestion(Question question);
+    QuestionDto saveQuestion(QuestionDto question);
 
-    List<Question> getAllQuestions();
+    List<QuestionDto> getAllQuestions();
 
-    Question getQuestionById(String id);
+    QuestionDto getQuestionById(String id);
 
-    Question updateQuestion(Question question, String id);
+    QuestionDto updateQuestion(QuestionDto question, String id);
 
     void deleteQuestion(String id);
 }

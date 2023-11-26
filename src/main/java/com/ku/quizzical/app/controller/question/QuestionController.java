@@ -31,29 +31,31 @@ public final class QuestionController {
     // CREATE Method
     // Saves a Question
     @PostMapping()
-    public ResponseEntity<Question> saveQuestion(@RequestBody Question question) {
-        return new ResponseEntity<Question>(this.service.saveQuestion(question), HttpStatus.OK);
+    public ResponseEntity<QuestionDto> saveQuestion(@RequestBody QuestionDto question) {
+        return new ResponseEntity<QuestionDto>(this.service.saveQuestion(question), HttpStatus.OK);
     }
 
     // READ Method
     // Gets all Questions
     @GetMapping()
-    public List<Question> getAllQuestions() {
+    public List<QuestionDto> getAllQuestions() {
         return this.service.getAllQuestions();
     }
 
     // READ Method
     // Gets a Question by its id
     @GetMapping("{id}")
-    public ResponseEntity<Question> getQuestionById(@PathVariable String id) {
-        return new ResponseEntity<Question>(this.service.getQuestionById(id), HttpStatus.OK);
+    public ResponseEntity<QuestionDto> getQuestionById(@PathVariable String id) {
+        return new ResponseEntity<QuestionDto>(this.service.getQuestionById(id), HttpStatus.OK);
     }
 
     // UPDATE Method
     // Updates a Question
     @PatchMapping("{id}")
-    public ResponseEntity<Question> updateQuestion(@PathVariable String id, @RequestBody Question question) {
-        return new ResponseEntity<Question>(this.service.updateQuestion(question, id), HttpStatus.OK);
+    public ResponseEntity<QuestionDto> updateQuestion(@PathVariable String id,
+            @RequestBody QuestionDto question) {
+        return new ResponseEntity<QuestionDto>(this.service.updateQuestion(question, id),
+                HttpStatus.OK);
     }
 
     // DELETE Method

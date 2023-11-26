@@ -1,5 +1,7 @@
 package com.ku.quizzical.app.controller.quiz;
 
+import java.util.List;
+import com.ku.quizzical.app.controller.question.Question;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,6 +30,9 @@ public final class Quiz {
 
     @Column(name = "description", nullable = false)
     private String description;
+
+    @OneToMany(mappedBy = "quiz")
+    private List<Question> questions;
 
     // To String Method
     @Override

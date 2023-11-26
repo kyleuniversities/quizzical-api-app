@@ -1,5 +1,6 @@
 package com.ku.quizzical.app.controller.question;
 
+import com.ku.quizzical.app.controller.quiz.Quiz;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,6 +31,10 @@ public final class Question {
 
     @Column(name = "number_of_milliseconds", nullable = false)
     private int numberOfMilliseconds;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "quiz_id")
+    public Quiz quiz;
 
     // To String Method
     @Override
